@@ -39,6 +39,8 @@ namespace MW_project
         /// </summary>
         protected override void Initialize()
         {
+            button = new Button(100, 100, 40, 100, Color.Red);
+
             cursorPosition = new Vector2(20, 20);
             cursor = new Texture2D(GraphicsDevice, 20, 20);
             Color[] square2 = new Color[20 * 20];
@@ -79,6 +81,7 @@ namespace MW_project
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            button.Update();
             cursorPosition = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
 
             base.Update(gameTime);
@@ -94,6 +97,7 @@ namespace MW_project
 
             spriteBatch.Begin();
 
+            spriteBatch.Draw(button.Texture, button.Position);
             spriteBatch.Draw(cursor, cursorPosition, origin: new Vector2(cursor.Width / 2, cursor.Height / 2));
 
             spriteBatch.End();
